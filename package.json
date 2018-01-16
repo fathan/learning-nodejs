@@ -12,5 +12,8 @@
     "Javascript"
   ],
   "author": "Fathan Rohman",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
