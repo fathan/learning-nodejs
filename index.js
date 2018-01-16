@@ -1,11 +1,23 @@
-const express = require('express');
-const app = express();
-const port = 3600;
+const http = require('http');
 
-app.get('/', function (request, response) {
-    response.send('Hello World!');
-});
+var routes = {
+    '/': function index (request, response) {
+        response.writeHead(200);
+        response.end('Hello World!');
+    },
+    '/foo': function foo (request, response) {
+        response.writeHead(200);
+        response.end('You are now viewing "foo"');
+    }
+}
 
-app.listen(port, function () {
-    console.log('Server listening on http://localhost:' + port);
-});
+http.createServer(function (request, response) { 
+    if (request.url in routes) {
+        return routes[request.url](request, response);
+    }
+
+    response.writeHead(404)
+    response.end(http.STATUS_CODES[404])
+}).listen(3600)
+
+
